@@ -1,8 +1,7 @@
-import {execute} from './util';
-import {dd} from 'dumper.js';
+import {execute, query} from './util';
 
 execute(async session => {
-  const result = await session.run(`
+  const result = await query(session, `
     MATCH (u:User {userId: "1" })
     WITH u
     MATCH (u)-[:FOLLOWS*0..1]->(f)
@@ -12,6 +11,6 @@ execute(async session => {
     ORDER BY s.timestamp DESC
   `);
 
-  dd(result);
+  console.log(result);
 });
 
